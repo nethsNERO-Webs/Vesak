@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Vesak Surprise</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0d0d1a;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        /* The Oil Lamp (Pana) Styling */
+        .lamp-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px auto;
+        }
+
+        .clay-pot {
+            width: 100px;
+            height: 50px;
+            background: #b35900;
+            border-radius: 0 0 50px 50px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .flame {
+            width: 24px;
+            height: 40px;
+            background: linear-gradient(to bottom, #ffea00, #ff5500);
+            border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+            position: absolute;
+            top: 10px;
+            left: 38px;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 1s ease-in-out;
+        }
+
+        /* Animated Glow when active */
+        .lit .flame {
+            opacity: 1;
+            transform: scale(1);
+            box-shadow: 0 0 20px #ffaa00, 0 0 40px #ff5500;
+            animation: flicker 0.15s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-1deg); }
+            100% { transform: scale(1.05) rotate(1deg); }
+        }
+
+        /* Greeting Text */
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .wish {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s ease-in-out;
+        }
+
+        .lit .wish {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Button */
+        button {
+            background: #ff7700;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 119, 0, 0.4);
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="vesakCard">
+        <div class="lamp-container">
+            <div class="flame"></div>
+            <div class="clay-pot"></div>
+        </div>
+        
+        <h1 id="title">Wishing You Peace</h1>
+        <p class="wish" id="wishText">May the divine light of Lord Buddha bring peace, harmony, and happiness to your life. <br><br><strong>Happy Vesak!</strong></p>
+        
+        <button id="lightBtn" onclick="lightLamp()">Light the Lamp</button>
+    </div>
+
+    <script>
+        function lightLamp() {
+            // Add the 'lit' class to trigger CSS animations
+            document.getElementById('vesakCard').classList.add('lit');
+            
+            // Change title
+            document.getElementById('title').innerText = "Wishing You a Blessed Vesak";
+            
+            // Hide the button after clicking
+            document.getElementById('lightBtn').classList.add('hidden');
+        }
+    </script>
+
+</body>
+</html>
