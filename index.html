@@ -3,37 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Vesak Surprise</title>
+    <title>A Blessed Vesak Surprise</title>
     <style>
+        * { box-sizing: border-box; }
         body {
             margin: 0;
             padding: 0;
-            background: #0d0d1a;
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at center, #0f0c20 0%, #050410 100%);
+            overflow: hidden;
+            font-family: 'Segoe UI', Roboto, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
+            color: #fff;
         }
 
-        .card {
+        /* Twinkling Stars Background */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2"><rect width="2" height="2" fill="white" opacity="0.3"/></svg>');
+            background-size: 50px 50px;
+            z-index: 1;
+        }
+
+        .container {
             text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            max-width: 400px;
-            width: 90%;
+            z-index: 5;
+            width: 100%;
+            padding: 20px;
         }
 
-        /* The Oil Lamp (Pana) Styling */
-        .lamp-container {
+        /* The Main Vesak Lantern */
+        .vesak-koodu {
+            width: 140px;
+            height: 140px;
+            background: rgba(255, 255, 255, 0.15);
+            margin: 0 auto 40px auto;
             position: relative;
-            width: 100px;
+            transform: rotate(45deg);
+            border: 3px solid rgba(255, 215, 0, 0.4);
+            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 1.5s ease;
+            animation: floatLantern 4s ease-in-out infinite alternate;
+        }
+
+        /* Side diamonds of the traditional lantern structure */
+        .vesak-koodu::before, .vesak-koodu::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        .vesak-koodu::before { transform: rotate(30deg); }
+        .vesak-koodu::after { transform: rotate(60deg); }
+
+        /* Tassels (Pataw) hanging from the lantern */
+        .tassel-container {
+            position: absolute;
+            bottom: -40px;
+            left: -40px;
+            transform: rotate(-45deg);
+            display: flex;
+            gap: 15px;
+            opacity: 0.7;
+        }
+        .tassel {
+            width: 8px;
+            height: 50px;
+            background: linear-gradient(to bottom, #ff4500, transparent);
+            animation: swing 2s ease-in-out infinite alternate;
+            transform-origin: top center;
+        }
+        .tassel:nth-child(2) { animation-delay: 0.5s; background: linear-gradient(to bottom, #ffd700, transparent); }
+        .tassel:nth-child(3) { animation-delay: 0.2s; background: linear-gradient(to bottom, #ff1493, transparent); }
+
+        /* Animated floating effect for main lantern */
+        @keyframes floatLantern {
+            0% { transform: rotate(45deg) translateY(0px); }
+            100% { transform: rotate(47deg) translateY(-15px); }
+        }
+        @keyframes swing {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
+        }
+
+        /* Activated/Lit State of Lantern */
+        .lit .vesak-koodu {
+            background: radial-gradient(circle, #fff 10%, #ffbb00 60%, #ff4500 100%);
+            border-color: #ffd700;
+            box-shadow: 0 0 50px #ffaa00, 0 0 100px #ff4500, inset 0 0 20px #fff;
+            transform: rotate(45deg) scale(1.1);
+            animation: litFloat 3s ease-in-out infinite alternate;
+        }
+        @keyframes litFloat {
+            0% { transform: rotate(45deg) translateY(-15px) scale(1.1); box-shadow: 0 0 40px #ffaa00, 0 0 80px #ff4500; }
+            100% { transform: rotate(43deg) translateY(-30px) scale(1.15); box-shadow: 0 0 60px #ffcc00, 0 0 120px #ff5500; }
+        }
+
+        /* Text and Greetings */
+        h1 {
+            font-size: 2.2rem;
+            color: #ffd700;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(255,215,0,0.3);
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        p {
+            font-size: 1.1rem;
+            color: #ddd;
+            margin-bottom: 30px;
+        }
+
+        .message-box {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .lit .message-box {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Elegant Interaction Button */
+        .action-btn {
+            background: linear-gradient(45deg, #ff7700, #ffaa00);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 120, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+        .action-btn:polyline { outline: none; }
+        .action-btn:active { transform: scale(0.95); }
+        .lit .action-btn { display: none; }
+
+        /* Floating Mini Lamps (Generated by JS) */
+        .floating-lamp {
+            position: absolute;
+            bottom: -50px;
+            background: radial-gradient(circle at center, #ffea00 20%, #ff5500 70%, transparent 100%);
+            border-radius: 50%;
+            filter: blur(1px);
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 2;
+            animation: floatUp linear forwards;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) translateX(0) scale(0.5); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-105vh) translateX(var(--drift)) scale(1.2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars"></div>
+
+    <div class="container" id="mainContainer">
+        <div class="vesak-koodu" id="lantern" onclick="celebrateVesak()">
+            <div class="tassel-container">
+                <div class="tassel"></div>
+                <div class="tassel"></div>
+                <div class="tassel"></div>
+            </div>
+        </div>
+
+        <div id="introGroup">
+            <h1>A Gift of Light</h1>
+            <p>Tap the lantern to light up the night</p>
+            <button class="action-btn" onclick="celebrateVesak()">Light the Festival</button>
+        </div>
+
+        <div class="message-box" id="messageBox">
+            <h1 style="color: #ffd700; font-weight: 600;">Happy Vesak</h1>
+            <p style="line-height: 1.8; color: #f0f0f0;">
+                May your life be filled with the blessings of peace, absolute harmony, and pure joy. Let the light of wisdom guide you today and always.
+            </p>
+        </div>
+    </div>
+
+    <!-- Background Music (Peaceful Flute track) -->
+    <audio id="vesakMusic" loop src="https://assets.mixkit.co/active_storage/sfx/123/123-100.wav"></audio>
+
+    <script>
+        function celebrateVesak() {
+            const container = document.getElementById('mainContainer');
+            if (container.classList.contains('lit')) return; // Prevent double clicks
+
+            container.classList.add('lit');
+            document.getElementById('introGroup').style.display = 'none';
+
+            // Play peaceful audio try/catch protects if browser blocks autoplay
+            const audio = document.getElementById('vesakMusic');
+            audio.volume = 0.4;
+            audio.play().catch(e => console.log("Audio waiting for user gesture interaction."));
+
+            // Launch the floating lantern festival stream!
+            generateLanternStream();
+        }
+
+        function generateLanternStream() {
+            // Generates 80 floating mini lights over time
+            let count = 0;
+            const maxLamps = 80;
+            
+            const interval = setInterval(() => {
+                if (count > maxLamps) {
+                    clearInterval(interval);
+                    return;
+                }
+                createMiniLamp();
+                count++;
+            }, 150);
+        }
+
+        function createMiniLamp() {
+            const lamp = document.createElement('div');
+            lamp.classList.add('floating-lamp');
+            
+            // Random sizes, speeds, and horizontal drift patterns
+            const size = Math.random() * 16 + 8; 
+            const startX = Math.random() * window.innerWidth;
+            const duration = Math.random() * 5 + 6; // 6 to 11 seconds
+            const drift = (Math.random() * 150) - 75; // Left/Right wind sway
+
+            lamp.style.width = `${size}px`;
+            lamp.style.height = `${size}px`;
+            lamp.style.left = `${startX}px`;
+            lamp.style.animationDuration = `${duration}s`;
+            lamp.style.setProperty('--drift', `${drift}px`);
+            
+            // Make glow variations
+            lamp.style.boxShadow = `0 0 ${size}px #ffaa00`;
+
+            document.body.appendChild(lamp);
+
+            // Remove it from the app DOM after animation finishes to prevent lag
+            setTimeout(() => {
+                lamp.remove();
+            }, duration * 1000);
+        }
+    </script>
+</body>
+</html>
             height: 100px;
             margin: 0 auto 30px auto;
         }
