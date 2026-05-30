@@ -3,376 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Blessed Vesak Surprise</title>
+    <title>Saman's Grand Vesak Zone</title>
     <style>
-        * { box-sizing: border-box; }
         body {
             margin: 0;
-            padding: 0;
-            background: radial-gradient(circle at center, #0f0c20 0%, #050410 100%);
-            overflow: hidden;
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: #020208;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Thorana Title Style */
+        .thorana-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #ffcc00;
+            text-shadow: 0 0 10px #ff3300, 0 0 20px #ffaa00;
+            animation: titlePulse 2s infinite alternate;
+        }
+
+        @keyframes titlePulse {
+            0% { text-shadow: 0 0 10px #ff3300, 0 0 20px #ffaa00; filter: hue-rotate(0deg); }
+            100% { text-shadow: 0 0 20px #00ffff, 0 0 40px #0000ff; filter: hue-rotate(360deg); }
+        }
+
+        /* Main Pandal Centerstage */
+        .pandal-display {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, #200 20%, #000 80%);
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            color: #fff;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            border: 4px solid #333;
         }
 
-        /* Twinkling Stars Background */
-        .stars {
+        /* Bulb Ring Array */
+        .bulb-ring {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2"><rect width="2" height="2" fill="white" opacity="0.3"/></svg>');
-            background-size: 50px 50px;
-            z-index: 1;
-        }
-
-        .container {
-            text-align: center;
-            z-index: 5;
-            width: 100%;
-            padding: 20px;
-        }
-
-        /* The Main Vesak Lantern */
-        .vesak-koodu {
-            width: 140px;
-            height: 140px;
-            background: rgba(255, 255, 255, 0.15);
-            margin: 0 auto 40px auto;
-            position: relative;
-            transform: rotate(45deg);
-            border: 3px solid rgba(255, 215, 0, 0.4);
-            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: all 1.5s ease;
-            animation: floatLantern 4s ease-in-out infinite alternate;
-        }
-
-        /* Side diamonds of the traditional lantern structure */
-        .vesak-koodu::before, .vesak-koodu::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-        }
-        .vesak-koodu::before { transform: rotate(30deg); }
-        .vesak-koodu::after { transform: rotate(60deg); }
-
-        /* Tassels (Pataw) hanging from the lantern */
-        .tassel-container {
-            position: absolute;
-            bottom: -40px;
-            left: -40px;
-            transform: rotate(-45deg);
-            display: flex;
-            gap: 15px;
-            opacity: 0.7;
-        }
-        .tassel {
-            width: 8px;
-            height: 50px;
-            background: linear-gradient(to bottom, #ff4500, transparent);
-            animation: swing 2s ease-in-out infinite alternate;
-            transform-origin: top center;
-        }
-        .tassel:nth-child(2) { animation-delay: 0.5s; background: linear-gradient(to bottom, #ffd700, transparent); }
-        .tassel:nth-child(3) { animation-delay: 0.2s; background: linear-gradient(to bottom, #ff1493, transparent); }
-
-        /* Animated floating effect for main lantern */
-        @keyframes floatLantern {
-            0% { transform: rotate(45deg) translateY(0px); }
-            100% { transform: rotate(47deg) translateY(-15px); }
-        }
-        @keyframes swing {
-            0% { transform: rotate(-5deg); }
-            100% { transform: rotate(5deg); }
-        }
-
-        /* Activated/Lit State of Lantern */
-        .lit .vesak-koodu {
-            background: radial-gradient(circle, #fff 10%, #ffbb00 60%, #ff4500 100%);
-            border-color: #ffd700;
-            box-shadow: 0 0 50px #ffaa00, 0 0 100px #ff4500, inset 0 0 20px #fff;
-            transform: rotate(45deg) scale(1.1);
-            animation: litFloat 3s ease-in-out infinite alternate;
-        }
-        @keyframes litFloat {
-            0% { transform: rotate(45deg) translateY(-15px) scale(1.1); box-shadow: 0 0 40px #ffaa00, 0 0 80px #ff4500; }
-            100% { transform: rotate(43deg) translateY(-30px) scale(1.15); box-shadow: 0 0 60px #ffcc00, 0 0 120px #ff5500; }
-        }
-
-        /* Text and Greetings */
-        h1 {
-            font-size: 2.2rem;
-            color: #ffd700;
-            margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(255,215,0,0.3);
-            font-weight: 300;
-            letter-spacing: 2px;
-        }
-        p {
-            font-size: 1.1rem;
-            color: #ddd;
-            margin-bottom: 30px;
-        }
-
-        .message-box {
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(8px);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .lit .message-box {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Elegant Interaction Button */
-        .action-btn {
-            background: linear-gradient(45deg, #ff7700, #ffaa00);
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 120, 0, 0.4);
-            transition: all 0.3s ease;
-        }
-        .action-btn:polyline { outline: none; }
-        .action-btn:active { transform: scale(0.95); }
-        .lit .action-btn { display: none; }
-
-        /* Floating Mini Lamps (Generated by JS) */
-        .floating-lamp {
-            position: absolute;
-            bottom: -50px;
-            background: radial-gradient(circle at center, #ffea00 20%, #ff5500 70%, transparent 100%);
             border-radius: 50%;
-            filter: blur(1px);
-            opacity: 0.8;
-            pointer-events: none;
-            z-index: 2;
-            animation: floatUp linear forwards;
-        }
-        @keyframes floatUp {
-            0% { transform: translateY(0) translateX(0) scale(0.5); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-105vh) translateX(var(--drift)) scale(1.2); opacity: 0; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="stars"></div>
-
-    <div class="container" id="mainContainer">
-        <div class="vesak-koodu" id="lantern" onclick="celebrateVesak()">
-            <div class="tassel-container">
-                <div class="tassel"></div>
-                <div class="tassel"></div>
-                <div class="tassel"></div>
-            </div>
-        </div>
-
-        <div id="introGroup">
-            <h1>A Gift of Light</h1>
-            <p>Tap the lantern to light up the night</p>
-            <button class="action-btn" onclick="celebrateVesak()">Light the Festival</button>
-        </div>
-
-        <div class="message-box" id="messageBox">
-            <h1 style="color: #ffd700; font-weight: 600;">Happy Vesak</h1>
-            <p style="line-height: 1.8; color: #f0f0f0;">
-                May your life be filled with the blessings of peace, absolute harmony, and pure joy. Let the light of wisdom guide you today and always.
-            </p>
-        </div>
-    </div>
-
-    <!-- Background Music (Peaceful Flute track) -->
-    <audio id="vesakMusic" loop src="https://assets.mixkit.co/active_storage/sfx/123/123-100.wav"></audio>
-
-    <script>
-        function celebrateVesak() {
-            const container = document.getElementById('mainContainer');
-            if (container.classList.contains('lit')) return; // Prevent double clicks
-
-            container.classList.add('lit');
-            document.getElementById('introGroup').style.display = 'none';
-
-            // Play peaceful audio try/catch protects if browser blocks autoplay
-            const audio = document.getElementById('vesakMusic');
-            audio.volume = 0.4;
-            audio.play().catch(e => console.log("Audio waiting for user gesture interaction."));
-
-            // Launch the floating lantern festival stream!
-            generateLanternStream();
         }
 
-        function generateLanternStream() {
-            // Generates 80 floating mini lights over time
-            let count = 0;
-            const maxLamps = 80;
-            
-            const interval = setInterval(() => {
-                if (count > maxLamps) {
-                    clearInterval(interval);
-                    return;
-                }
-                createMiniLamp();
-                count++;
-            }, 150);
-        }
-
-        function createMiniLamp() {
-            const lamp = document.createElement('div');
-            lamp.classList.add('floating-lamp');
-            
-            // Random sizes, speeds, and horizontal drift patterns
-            const size = Math.random() * 16 + 8; 
-            const startX = Math.random() * window.innerWidth;
-            const duration = Math.random() * 5 + 6; // 6 to 11 seconds
-            const drift = (Math.random() * 150) - 75; // Left/Right wind sway
-
-            lamp.style.width = `${size}px`;
-            lamp.style.height = `${size}px`;
-            lamp.style.left = `${startX}px`;
-            lamp.style.animationDuration = `${duration}s`;
-            lamp.style.setProperty('--drift', `${drift}px`);
-            
-            // Make glow variations
-            lamp.style.boxShadow = `0 0 ${size}px #ffaa00`;
-
-            document.body.appendChild(lamp);
-
-            // Remove it from the app DOM after animation finishes to prevent lag
-            setTimeout(() => {
-                lamp.remove();
-            }, duration * 1000);
-        }
-    </script>
-</body>
-</html>
-            height: 100px;
-            margin: 0 auto 30px auto;
-        }
-
-        .clay-pot {
-            width: 100px;
-            height: 50px;
-            background: #b35900;
-            border-radius: 0 0 50px 50px;
+        .bulb {
             position: absolute;
-            bottom: 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #444;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s ease;
         }
 
-        .flame {
-            width: 24px;
-            height: 40px;
-            background: linear-gradient(to bottom, #ffea00, #ff5500);
-            border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
-            position: absolute;
-            top: 10px;
-            left: 38px;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 1s ease-in-out;
+        /* Audio Control Dashboard */
+        .dashboard {
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid #ffcc00;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.2);
         }
 
-        /* Animated Glow when active */
-        .lit .flame {
-            opacity: 1;
-            transform: scale(1);
-            box-shadow: 0 0 20px #ffaa00, 0 0 40px #ff5500;
-            animation: flicker 0.15s infinite alternate;
+        .btn-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
         }
 
-        @keyframes flicker {
-            0% { transform: scale(1) rotate(-1deg); }
-            100% { transform: scale(1.05) rotate(1deg); }
-        }
-
-        /* Greeting Text */
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+        .dash-btn {
+            background: #222;
             color: #ffd700;
-        }
-
-        .wish {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s ease-in-out;
-        }
-
-        .lit .wish {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Button */
-        button {
-            background: #ff7700;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 1rem;
-            border-radius: 25px;
+            border: 1px solid #ffd700;
+            padding: 10px;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(255, 119, 0, 0.4);
-            transition: transform 0.2s;
+            border-radius: 5px;
         }
 
-        button:hover {
-            transform: scale(1.05);
+        .dash-btn:active {
+            background: #ffd700;
+            color: #000;
         }
 
-        .hidden {
-            display: none;
+        /* Center Art Wrapper */
+        .center-art {
+            width: 180px;
+            height: 180px;
+            z-index: 10;
+            background: #b35900;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            box-shadow: 0 0 20px #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="card" id="vesakCard">
-        <div class="lamp-container">
-            <div class="flame"></div>
-            <div class="clay-pot"></div>
+    <div class="thorana-title">ඩිජිටල් වෙසක් කලාපය</div>
+
+    <!-- The Animated Light Display -->
+    <div class="pandal-display">
+        <div class="bulb-ring" id="ring1"></div>
+        <div class="center-art">🪔</div>
+    </div>
+
+    <!-- Control Systems -->
+    <div class="dashboard">
+        <h3>🎛️ Pandal Controller</h3>
+        <p>Current Pattern: <span id="pattern-name" style="color: #00ffcc;">Wave Chaser</span></p>
+        <div class="btn-panel">
+            <button class="dash-btn" onclick="changePattern(0)">Pattern 1</button>
+            <button class="dash-btn" onclick="changePattern(1)">Pattern 2</button>
         </div>
-        
-        <h1 id="title">Wishing You Peace</h1>
-        <p class="wish" id="wishText">May the divine light of Lord Buddha bring peace, harmony, and happiness to your life. <br><br><strong>Happy Vesak!</strong></p>
-        
-        <button id="lightBtn" onclick="lightLamp()">Light the Lamp</button>
     </div>
 
     <script>
-        function lightLamp() {
-            // Add the 'lit' class to trigger CSS animations
-            document.getElementById('vesakCard').classList.add('lit');
+        const ring = document.getElementById('ring1');
+        const totalBulbs = 24;
+        const bulbsArray = [];
+        let currentPattern = 0;
+        let step = 0;
+
+        // Math to arrange bulbs perfectly in a digital circle
+        for (let i = 0; i < totalBulbs; i++) {
+            const bulb = document.createElement('div');
+            bulb.classList.add('bulb');
             
-            // Change title
-            document.getElementById('title').innerText = "Wishing You a Blessed Vesak";
+            const angle = (i / totalBulbs) * 2 * Math.PI;
+            const radius = 145; // Distance from center
+            const x = 160 + radius * Math.cos(angle);
+            const y = 160 + radius * Math.sin(angle);
             
-            // Hide the button after clicking
-            document.getElementById('lightBtn').classList.add('hidden');
+            bulb.style.left = `${x}px`;
+            bulb.style.top = `${y}px`;
+            
+            ring.appendChild(bulb);
+            bulbsArray.push(bulb);
+        }
+
+        // The Light Chaser engine logic loop
+        const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+        
+        function runChaser() {
+            step++;
+            bulbsArray.forEach((bulb, index) => {
+                if (currentPattern === 0) {
+                    // Pattern 1: Wave Chase effect
+                    const colorIndex = (index + step) % colors.length;
+                    bulb.style.background = colors[colorIndex];
+                    bulb.style.boxShadow = `0 0 12px ${colors[colorIndex]}`;
+                } else {
+                    // Pattern 2: Alternating blocks flash
+                    const group = Math.floor(index / 3) % 2;
+                    const activeGroup = step % 2;
+                    if (group === activeGroup) {
+                        bulb.style.background = '#ff0055';
+                        bulb.style.boxShadow = '0 0 15px #ff0055';
+                    } else {
+                        bulb.style.background = '#ffcc00';
+                        bulb.style.boxShadow = '0 0 15px #ffcc00';
+                    }
+                }
+            });
+        }
+
+        setInterval(runChaser, 150); // Speed of the electrical circuits
+
+        function changePattern(num) {
+            currentPattern = num;
+            document.getElementById('pattern-name').innerText = num === 0 ? "Wave Chaser" : "Block Alternate";
         }
     </script>
-
 </body>
 </html>
